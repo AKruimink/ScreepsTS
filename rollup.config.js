@@ -27,7 +27,8 @@ export default {
         resolve({ rootDir: "src" }),
         commonjs(),
         typescript({ tsconfig: "./tsconfig.json" }),
-        copy({ targets: [{ src: 'dist/*', dest: cfg.path }], hook: 'writeBundle' }),
-        // screeps({ config: cfg, dryRun: cfg == null })
+        (dest === 'local'
+            ? copy({ targets: [{ src: 'dist/*', dest: cfg.path }], hook: 'writeBundle' })
+            : screeps({ config: cfg, dryRun: cfg == null }))
     ]
 }
